@@ -6,14 +6,18 @@ function dataset = normaliseData(rawData)
 %   normalisedDataset = normaliseData(trn1);
 %
 
-newData = rawData;
+normData = zeros(size(rawData, 1), 18);
 
 % Loop through each of the 17 dimensions normalising within each column.
 for i = 1:17
     dimMin = min(rawData(:,i));
     dimMax = max(rawData(:,i));
-    newData(:,i) = mat2gray(rawData(:,i), [dimMin, dimMax]);
+    normData(:,i) = mat2gray(rawData(:,i), [dimMin, dimMax]);
 end
 
+% Create the second of the two classifications where they are the inverse
+% of each other.
+normData(:,18) = not(normData(:,17));
+
 % Output result
-dataset = newData;
+dataset = normData;
