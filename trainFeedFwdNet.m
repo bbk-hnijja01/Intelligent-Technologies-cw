@@ -23,9 +23,10 @@ net = configure(net, netx, nett);
 net = setwb(net, initWeights);
 
 net.performFcn = 'sse'; % default is 'mse'
-net.trainParam.epochs = 100;
-net.trainparam.lr = 0.3;
-net.trainParam.mc = 0.6;
+
+net.trainParam.epochs = 100; % max. epochs/iterations
+% net.trainparam.lr = 0.3; % learning rate
+% net.trainParam.mc = 0.6; % momentum constant
 net.trainParam.showWindow = 0; % default is 1 to show dialogue
 
 [net,tr] = train(net,netx,nett);

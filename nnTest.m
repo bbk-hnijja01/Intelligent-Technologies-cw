@@ -40,6 +40,6 @@ testIndices = vec2ind(testY);
 
 % plotconfusion(testT,testY);
 
-[c,cm] = confusion(testT,testY)
+[c,cm] = confusion(testT,testY);
 fprintf('Test - Percentage Correct Classification : %f%%\n', 100*(1-c));
 fprintf('Test - Percentage Incorrect Classification : %f%%\n', 100*c);
