@@ -19,9 +19,9 @@ function [trainOutput, testOutput] = runExperiment(trainingData, testData, ...
 hiddenNodeOptions = [5 15 25 35 45 55];
 trainingAlgoOptions = {'trainlm' 'trainscg' 'trainrp'};
 trainOutputData = ...
-    cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 11);
+    cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 12);
 testOutputData = ...
-    cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 8);
+    cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 9);
 
 i = 0;
 
@@ -41,7 +41,7 @@ for hNodes = hiddenNodeOptions
                 trainFeedFwdNet(trainingData.', hNodes, trAlgo{1}, randomWeights);
             
             % store results
-            trainOutputData(i,:) = {hNodes, nRun, trAlgo{1}, c, ...
+            trainOutputData(i,:) = {hNodes, nRun, trAlgo{1}, 1-c, c, ...
                 cm(1,1), cm(1,2), cm(2,1), cm(2,2), ...
                 tr.num_epochs, tr.best_epoch, tr.best_perf};
 
@@ -60,7 +60,7 @@ for hNodes = hiddenNodeOptions
             [c,cm] = confusion(testT,testY);
 
             % store results
-            testOutputData(i,:) = {hNodes, nRun, trAlgo{1}, c, ...
+            testOutputData(i,:) = {hNodes, nRun, trAlgo{1}, 1-c, c, ...
                                     cm(1,1), cm(1,2), cm(2,1), cm(2,2)};
 
         end
