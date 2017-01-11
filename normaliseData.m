@@ -5,6 +5,8 @@ function [trnDataSet, tstDataSet] = normaliseData(rawTrnData, rawTstData)
 % Example:
 %   normalisedDataset = normaliseData(trn1);
 %
+% Author : Harsharan Nijjar
+%
 
 normTrnData = zeros(size(rawTrnData, 1), 18);
 normTstData = zeros(size(rawTstData, 1), 18);

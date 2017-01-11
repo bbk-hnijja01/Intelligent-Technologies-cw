@@ -1,13 +1,27 @@
-function [trainOutput, testOutput] = runExperiment(trainingData, testData, numOfRuns)
+function [trainOutput, testOutput] = runExperiment(trainingData, testData, ...
+    numOfRuns)
+% runExperiment calls trainFeedFwdNet for the different configurations that
+% are to be run for number of hidden nodes, training algorithms, and for
+% the number of runs passed in.  It performs this for the training and
+% testing dataset passed in.
 %
+% trainingData : trainging dataset
+% testData : dataset for testing the trained ANN
+% numOfRuns : number of times to create a ANN and store the results
 %
+% Example
+%   [trn1Res, tst1Res] = runExperiment(trn1n, tst1n, 30)
+%
+% Author : Harsharan Nijjar
 %
 
-% Initialise
+% Initialise 
 hiddenNodeOptions = [5 15 25 35 45 55];
 trainingAlgoOptions = {'trainlm' 'trainscg' 'trainrp'};
-trainOutputData = cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 11);
-testOutputData = cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 8);
+trainOutputData = ...
+    cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 11);
+testOutputData = ...
+    cell(size(hiddenNodeOptions, 2) * size(trainingAlgoOptions, 2) * numOfRuns, 8);
 
 i = 0;
 
@@ -23,7 +37,8 @@ for hNodes = hiddenNodeOptions
 
             i = i + 1;
             % train net
-            [net, tr, c, cm, netx, nett] = trainFeedFwdNet(trainingData.', hNodes, trAlgo{1}, randomWeights);
+            [net, tr, c, cm, netx, nett] = ...
+                trainFeedFwdNet(trainingData.', hNodes, trAlgo{1}, randomWeights);
             
             % store results
             trainOutputData(i,:) = {hNodes, nRun, trAlgo{1}, c, ...
@@ -45,7 +60,8 @@ for hNodes = hiddenNodeOptions
             [c,cm] = confusion(testT,testY);
 
             % store results
-            testOutputData(i,:) = {hNodes, nRun, trAlgo{1}, c, cm(1,1), cm(1,2), cm(2,1), cm(2,2)};
+            testOutputData(i,:) = {hNodes, nRun, trAlgo{1}, c, ...
+                                    cm(1,1), cm(1,2), cm(2,1), cm(2,2)};
 
         end
         

@@ -1,3 +1,9 @@
+%
+% Author : Harsharan Nijjar
+%
+% Script to initialise and normalise the frame data.
+%
+
 % Load data files
 trn1 = importfile('../endoscopy-video-frames-data/1trn.txt', 1, 300);
 trn2 = importfile('../endoscopy-video-frames-data/2trn.txt', 1, 300);
@@ -23,11 +29,3 @@ tst7 = importfile('../endoscopy-video-frames-data/7tst.txt', 1, 3721);
 [trn5n, tst5n] = normaliseData(trn5, tst5);
 [trn6n, tst6n] = normaliseData(trn6, tst6);
 [trn7n, tst7n] = normaliseData(trn7, tst7);
-
-% tst1n = normaliseData(tst1);
-% tst2n = normaliseData(tst2);
-% tst3n = normaliseData(tst3);
-% tst4n = normaliseData(tst4);
-% tst5n = normaliseData(tst5);
-% tst6n = normaliseData(tst6);
-% tst7n = normaliseData(tst7);

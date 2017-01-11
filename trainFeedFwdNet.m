@@ -10,8 +10,8 @@ function [trainedNet, testRes, c, cm, netInputs, netTargets]  = ...
 % Example:
 %   [trainingRes, testRes] = importfile(trn1n, 15, 'trainlm');
 %
-
-% transformedTDS = trainDataSet.';
+% Author : Harsharan Nijjar
+%
 
 netx = trainingData(1:16,:);
 nett = trainingData(17:18,:);
@@ -23,6 +23,12 @@ net = configure(net, netx, nett);
 net = setwb(net, initWeights);
 
 net.performFcn = 'sse'; % default is 'mse'
+
+% Parameters for dividing the ANN training data into training, validation,
+% and test data.
+net.divideParam.trainRatio = 70/100; % default 0.7
+net.divideParam.valRatio = 15/100; % default 0.15
+net.divideParam.testRatio = 15/100; % default 0.15
 
 net.trainParam.epochs = 100; % max. epochs/iterations
 % net.trainparam.lr = 0.3; % learning rate
