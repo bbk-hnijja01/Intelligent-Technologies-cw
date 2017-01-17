@@ -1,3 +1,6 @@
+%
+% Author : Harsharan Nijjar
+% Date : 17 January 2017
 % Script to process full data set in one go
 % 
 
@@ -14,7 +17,7 @@ status = mkdir(ResultsDirectory);
 fprintf('%s created - status = %d\n', ResultsDirectory, status);
 
 fprintf('Running all frames\n');
-[trnFullRes, tstFullRes] = runExperiment(trnFulln, tstFulln, fullNoOfRuns);
+[trnFullRes, tstFullRes] = runExperiment(trnFulln, tstFulln, 1, fullNoOfRuns);
 trnFullTable = cell2table(trnFullRes, 'VariableNames', ...
     {'HiddenNodes', 'Run', 'TraingingAlgo', 'Correct', 'Incorrect', 'c11', 'c12', 'c21', 'c22', 'EpochsRun', 'BestEpoch', 'BestPerf'});
 writetable(trnFullTable, strcat(ResultsDirectory, '/', 'FullTrnResults.csv'));
