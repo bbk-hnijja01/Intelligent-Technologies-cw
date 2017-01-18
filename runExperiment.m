@@ -43,8 +43,8 @@ for hNodes = hiddenNodeOptions
 
     % Seed the random generated numbers so that the same starting weights are
     % used for each hidden layer config.
-    rng('default');
-    rng(12345);
+%     rng('default');
+%     rng(12345);
 
     for nRun = 1:numOfRuns
         % weights -1 to 1
