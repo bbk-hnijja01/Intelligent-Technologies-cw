@@ -1,7 +1,7 @@
 %
 % Author : Harsharan Nijjar
 % Date : 17 January 2017
-function [trainOutput, testOutput] = runExperiment(trainingData, testData, ...
+function [trainOutput, testOutput] = runExperiment(network, trainingData, testData, ...
     numOfLayers, numOfRuns)
 % runExperiment calls trainFeedFwdNet for the different configurations that
 % are to be run for number of hidden nodes, training algorithms, and for
@@ -58,8 +58,13 @@ for hNodes = hiddenNodeOptions
             % train net
 %             [net, tr, c, cm, netx, nett] = ...
 %                 trainFeedFwdNet(trainingData.', hNodes, trAlgo{1}, randomWeights);
-            [net, tr, c, cm, netx, nett] = ...
-                trainFeedFwdNet(trainingData.', layerNodes, trAlgo{1}, randomWeights);
+            if strcmp(network, 'feedfwd')
+                [net, tr, c, cm, netx, nett] = ...
+                    trainFeedFwdNet(trainingData.', layerNodes, trAlgo{1}, randomWeights);
+            elseif strcmp(network, 'pattern')
+                [net, tr, c, cm, netx, nett] = ...
+                    trainPatternNet(trainingData.', layerNodes, trAlgo{1}, randomWeights);
+            end
             
             % store results
             trainOutputData(i,:) = {hNodes, nRun, trAlgo{1}, 1-c, c, ...
